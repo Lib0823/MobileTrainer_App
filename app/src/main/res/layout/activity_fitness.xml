@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FitnessActivity"
+    android:orientation="vertical">
+
+    // BMI메시지
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10pt"
+        android:gravity="center"
+        android:text="운동목적" />
+
+    <TextView
+        android:id="@+id/BMI"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BMI" />
+
+
+    // 중간 버튼
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Diet"
+        android:textSize="7pt"
+        android:gravity="center"/>
+    <ImageButton
+        android:id="@+id/dietBtn"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_baseline_sentiment_very_dissatisfied_24"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LeanMassUp"
+        android:textSize="7pt"
+        android:gravity="center"/>
+    <ImageButton
+        android:id="@+id/leanmassUpBtn"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_baseline_sentiment_satisfied_24"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BulkUP"
+        android:textSize="7pt"
+        android:gravity="center"/>
+    <ImageButton
+        android:id="@+id/bulkUpBtn"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_baseline_sentiment_satisfied_alt_24"/>
+
+
+
+    // 하단 네비게이션
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottonNavi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:rotationX="20"
+            android:background="#B8C7F0"
+            app:itemIconTint="#000000"
+            app:itemTextColor="#000000"
+            app:menu="@menu/botton_menu"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="383dp" />
+    </LinearLayout>
+
+</LinearLayout>
