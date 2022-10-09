@@ -1,14 +1,20 @@
 package com.example.project2;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.cos;
+import static java.lang.Math.pow;
+import static java.lang.StrictMath.atan2;
+import static java.lang.StrictMath.sin;
+import static java.lang.StrictMath.sqrt;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.hardware.Camera;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,15 +24,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.skt.Tmap.TMapGpsManager;
+import com.skt.Tmap.TMapPoint;
+import com.skt.Tmap.TMapPolyLine;
 import com.skt.Tmap.TMapView;
+
+import java.util.ArrayList;
 
 public class RunActivity extends AppCompatActivity implements TMapGpsManager.onLocationChangedCallback {
 
     private Chronometer chrono;
     private boolean running;
     private long pauseOffset;
+    TextView cal;
+
+    double[] lon = new double[100];
+    double[] lat = new double[100];
+    int count= 0;
+    double total = 0; // 총 거리
 
     Button startBtn, stopBtn, resetBtn, run2;
 
@@ -41,10 +58,11 @@ public class RunActivity extends AppCompatActivity implements TMapGpsManager.onL
     // 멀티터치 이벤트
     private double touch_interval_X = 0; // X 터치 간격
     private double touch_interval_Y = 0; // Y 터치 간격
-    private int zoom_in_count = 0; // 줌 인 카운트
-    private int zoom_out_count = 0; // 줌 아웃 카운트
-    private int touch_zoom = 0; // 줌 크기
+    //private int zoom_in_count = 0; // 줌 인 카운트
+    //private int zoom_out_count = 0; // 줌 아웃 카운트
+    //private int touch_zoom = 0; // 줌 크기
 
+    ArrayList<TMapPoint> alTMapPoint = new ArrayList<TMapPoint>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +70,7 @@ public class RunActivity extends AppCompatActivity implements TMapGpsManager.onL
         setContentView(R.layout.activity_run);
 
         //TMap
-        Button buttonZoomIn = (Button)findViewById(R.id.buttonZoomIn);
-        Button buttonZoomOut = (Button)findViewById(R.id.buttonZoomOut);
+
 
         // T Map View
         tMapView = new TMapView(this);
@@ -81,9 +98,13 @@ public class RunActivity extends AppCompatActivity implements TMapGpsManager.onL
 
         // Initial Setting
         tMapGPS.setMinTime(1000);    // 일정 시간마다 리셋
-        tMapGPS.setMinDistance(10);  // 일정 거리마다 리셋
+        tMapGPS.setMinDistance(5);  // 일정 거리마다 리셋
         //tMapGPS.setProvider(tMapGPS.NETWORK_PROVIDER); //네트워크
         tMapGPS.setProvider(tMapGPS.GPS_PROVIDER);       //GPS
+
+        // 화면중심을 단말의 현재위치로 이동
+        tMapView.setTrackingMode(true);
+        tMapView.setSightVisible(true);
 
         tMapGPS.OpenGps();
 
@@ -128,6 +149,7 @@ public class RunActivity extends AppCompatActivity implements TMapGpsManager.onL
                 running = false;
             }
         });
+
     }
 
     // 지속적으로 위치를 받아와 설정해줌
@@ -135,6 +157,41 @@ public class RunActivity extends AppCompatActivity implements TMapGpsManager.onL
     public void onLocationChange(Location location) {
         tMapView.setLocationPoint(location.getLongitude(), location.getLatitude());
         tMapView.setCenterPoint(location.getLongitude(), location.getLatitude());
+        double Longitude = location.getLongitude(); //경도
+        double Latitude = location.getLatitude();   //위도
+        alTMapPoint.add( new TMapPoint(Latitude, Longitude)); //가져온 경도,위도를 Point에 추가
+
+        TMapPolyLine tMapPolyLine = new TMapPolyLine();
+        tMapPolyLine.setLineColor(Color.RED);
+        tMapPolyLine.setLineWidth(10);
+        for( int i=0; i<alTMapPoint.size(); i++ ) {
+            tMapPolyLine.addLinePoint( alTMapPoint.get(i) );
+        }
+        tMapView.addTMapPolyLine("Line", tMapPolyLine); // point값을 polyLine로 그림
+
+
+        // 거리계산 식
+        if(count == 0){
+            lon[0] = Longitude;
+            lat[0] = Latitude;
+            lon[1] = Longitude;
+            lat[1] = Latitude;
+        }else{
+            lon[count] = Longitude;     // count로 매번 포인트마다 위도/경도를 대입
+            lat[count] = Latitude;
+            double d2r = (Math.PI / 180D);
+            double dlong = (lon[count] - lon[count-1]) * d2r;
+            double dlat = (lat[count] - lat[count-1]) * d2r;
+            double a = pow(sin(dlat/2.0), 2) + cos(lat[count-1]*d2r) * cos(lat[count]*d2r) * pow(sin(dlong/2.0), 2);
+            double c = 2 * atan2(sqrt(a), sqrt(1-a));
+            double d = 1000 / (6367 * c);
+
+            total += d;
+            cal = findViewById(R.id.cal);
+            cal.setText((String.format("%.0f", total)));    // m단위로 거리 출력
+        }
+        count++;
+
     }
 
     // 멀티터치(zoom in/out) 함수
