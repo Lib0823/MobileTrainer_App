@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -82,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, RunActivity.class);
+                intent.putExtra("text", id);
                 startActivity(intent);
             }
         });
@@ -106,6 +108,15 @@ public class MainActivity extends AppCompatActivity {
                 //finish();
             }
         });
+
+        // 러닝 프로그래스바
+        sql = "SELECT * FROM "+ helper.tableName + " WHERE id = '" + id + "'";
+        cursor = database.rawQuery(sql, null);
+        cursor.moveToNext();
+        int run = Integer.parseInt(cursor.getString(6));
+
+        ProgressBar progress = (ProgressBar) findViewById(R.id.progress) ;
+        progress.setProgress(run) ;
     }
     private class CheckTypesTask extends AsyncTask<Void, Void, Void> {
 

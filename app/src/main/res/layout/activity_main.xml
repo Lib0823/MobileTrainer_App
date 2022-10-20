@@ -55,10 +55,22 @@
         <ImageButton
             android:id="@+id/runBtn"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="130dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_baseline_directions_run_24"
             />
+
+        <ProgressBar
+            android:layout_gravity="center"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="30dp"
+            android:max="30"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:progressTint="#66FFFF"
+            android:progressBackgroundTint="#E0E0E0"
+            android:radius="100dp"
+            android:id="@+id/progress" />
 
         // 하단 copyright
         <TextView

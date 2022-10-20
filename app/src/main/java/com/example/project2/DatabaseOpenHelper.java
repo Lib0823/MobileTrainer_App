@@ -25,19 +25,19 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     }
 
     public void createTable(SQLiteDatabase db){
-        String sql = "CREATE TABLE " + tableName + "(id text, pw text, name text, age integer, height integer, weight integer)";
+        String sql = "CREATE TABLE " + tableName + "(id text, pw text, name text, age integer, height integer, weight integer, run integer)";
         try {
             db.execSQL(sql);
         }catch (SQLException e){
         }
     }
 
-    public void insertUser(SQLiteDatabase db, String id, String pw, String name, int age, int height, int weight){
+    public void insertUser(SQLiteDatabase db, String id, String pw, String name, int age, int height, int weight, int run){
         Log.i("tag","회원가입을 했을때 실행함");
         db.beginTransaction();
         try {
-            String sql = "INSERT INTO " + tableName + "(id, pw, name, age, height, weight)" + "values('"+ id +"', '"+pw+"', '"+name+"', "+age+"" +
-                    ", "+height+", "+weight+")";
+            String sql = "INSERT INTO " + tableName + "(id, pw, name, age, height, weight, run)" + "values('"+ id +"', '"+pw+"', '"+name+"', "+age+"" +
+                    ", "+height+", "+weight+", "+run+")";
             db.execSQL(sql);
             db.setTransactionSuccessful();
         }catch (Exception e){

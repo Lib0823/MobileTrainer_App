@@ -14,11 +14,14 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -40,8 +43,17 @@ public class RunActivity extends AppCompatActivity implements TMapGpsManager.onL
     private long pauseOffset;
     TextView cal;
 
-    double[] lon = new double[100];
-    double[] lat = new double[100];
+    int m; // 크로노미터 분
+
+    int version = 1;
+    DatabaseOpenHelper helper;
+    SQLiteDatabase database;
+
+    String sql;
+    Cursor cursor;
+
+    double[] lon = new double[1000];
+    double[] lat = new double[1000];
     int count= 0;
     double total = 0; // 총 거리
 
@@ -69,7 +81,12 @@ public class RunActivity extends AppCompatActivity implements TMapGpsManager.onL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run);
 
-        //TMap
+        Intent getId = getIntent(); //전달할 데이터를 받을 Intent
+        //text 키값으로 데이터를 받는다. String을 받아야 하므로 getStringExtra()를 사용함
+        String id = getId.getStringExtra("text");
+        //DataBase연결부분
+        helper = new DatabaseOpenHelper(RunActivity.this, DatabaseOpenHelper.tableName, null, version);
+        database = helper.getWritableDatabase();
 
 
         // T Map View
@@ -97,8 +114,8 @@ public class RunActivity extends AppCompatActivity implements TMapGpsManager.onL
         tMapGPS = new TMapGpsManager(this);
 
         // Initial Setting
-        tMapGPS.setMinTime(1000);    // 일정 시간마다 리셋
-        tMapGPS.setMinDistance(5);  // 일정 거리마다 리셋
+        tMapGPS.setMinTime(100);    // 일정 시간마다 리셋
+        tMapGPS.setMinDistance(1);  // 일정 거리마다 리셋
         //tMapGPS.setProvider(tMapGPS.NETWORK_PROVIDER); //네트워크
         tMapGPS.setProvider(tMapGPS.GPS_PROVIDER);       //GPS
 
@@ -139,14 +156,46 @@ public class RunActivity extends AppCompatActivity implements TMapGpsManager.onL
             }
         });
 
+        chrono.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener(){
+            @Override
+            public void onChronometerTick(Chronometer cArg) {
+                long time = SystemClock.elapsedRealtime() - cArg.getBase();
+                int h   = (int)(time /3600000);
+                m = (int)(time - h*3600000)/60000;
+                int s= (int)(time - h*3600000- m*60000)/1000 ;
+                String hh = h < 10 ? "0"+h: h+"";
+                String mm = m < 10 ? "0"+m: m+"";
+                String ss = s < 10 ? "0"+s: s+"";
+                chrono.setText(hh+":"+mm+":"+ss);
+            }
+        });
+
         //초기화버튼
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //초기화와 동시에 DB에 시간 값 저장
+//                String cr2 = String.valueOf(chrono);
+//                String cr3 = cr2.replace(":", "");
+//                Log.d(cr2, cr3);
+//                int time = Integer.parseInt(cr3);
+
+                sql = "SELECT * FROM "+ helper.tableName + " WHERE id = '" + id + "'";
+                cursor = database.rawQuery(sql, null);
+                cursor.moveToNext();   // 첫번째에서 다음 레코드가 없을때까지 읽음
+                int run = Integer.parseInt(cursor.getString(6));
+                run += m;
+                database.execSQL("UPDATE Users SET " +
+                        "run="+run+
+                        " WHERE id ='" + id + "'");
+
                 chrono.setBase(SystemClock.elapsedRealtime());
                 pauseOffset = 0;
                 chrono.stop();
                 running = false;
+                //count = 0;
+
             }
         });
 
@@ -184,11 +233,11 @@ public class RunActivity extends AppCompatActivity implements TMapGpsManager.onL
             double dlat = (lat[count] - lat[count-1]) * d2r;
             double a = pow(sin(dlat/2.0), 2) + cos(lat[count-1]*d2r) * cos(lat[count]*d2r) * pow(sin(dlong/2.0), 2);
             double c = 2 * atan2(sqrt(a), sqrt(1-a));
-            double d = 1000 / (6367 * c);
+            double d = 6367 * c;
 
             total += d;
             cal = findViewById(R.id.cal);
-            cal.setText((String.format("%.0f", total)));    // m단위로 거리 출력
+            cal.setText((String.format("%.2f", total)));    // km단위로 거리 출력
         }
         count++;
 

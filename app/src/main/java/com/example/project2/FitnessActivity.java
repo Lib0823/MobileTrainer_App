@@ -91,7 +91,7 @@ public class FitnessActivity extends AppCompatActivity {
         }
         String bmi2 = String.format("%.1f", bmi);
         TextView bmiResult = findViewById(R.id.BMI);
-        bmiResult.setText("BMI : '"+bmi2+"' 이므로 "+result+"입니다.\n("+recommend+"을(를) 추천합니다)");
+        bmiResult.setText("BMI : '"+bmi2+"' 이므로 "+result+"입니다.\n("+recommend+" 추천합니다)");
 
         moveDiet = (ImageButton) findViewById(R.id.dietBtn);
         moveDiet.setOnClickListener(new View.OnClickListener() {

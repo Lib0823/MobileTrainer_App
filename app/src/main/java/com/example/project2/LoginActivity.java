@@ -74,6 +74,9 @@ public class LoginActivity extends AppCompatActivity {
                     //로그인성공
                     Toast toast = Toast.makeText(LoginActivity.this, "로그인성공", Toast.LENGTH_SHORT);
                     toast.show();
+                    //Run값 초기화
+                    database.execSQL("UPDATE Users SET " +
+                            "run=0 WHERE id ='" + id + "'");
                     //인텐트 생성 및 호출
                     String inputId = idEditText.getText().toString();
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
