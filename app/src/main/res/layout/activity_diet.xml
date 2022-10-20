@@ -12,21 +12,5 @@
         android:layout_height="wrap_content"
         android:text="다이어트 홈"/>
 
-    <TextView
-        android:id="@+id/board"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="게시글 입력"
-        android:id="@+id/boardInput"/>
-    <Button
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:id="@+id/boardBtn"
-        android:text="전송"/>
-
 
 </LinearLayout>

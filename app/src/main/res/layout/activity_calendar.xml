@@ -10,23 +10,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/back_Btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Home"
-            android:backgroundTint="#A0A0A0"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/idMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="id 님의 운동일지"
-            android:backgroundTint="#A0A0A0"
-            android:gravity="center"
-            tools:ignore="MissingConstraints" />
-
         <CalendarView
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"

@@ -33,11 +33,6 @@ public class FitnessActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fitness);
 
-        Intent getId = getIntent(); //전달할 데이터를 받을 Intent
-        //text 키값으로 데이터를 받는다. String을 받아야 하므로 getStringExtra()를 사용함
-        String id = getId.getStringExtra("text");
-
-
         bottomNavi = findViewById(R.id.bottonNavi);
         bottomNavi.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -45,14 +40,12 @@ public class FitnessActivity extends AppCompatActivity {
                 switch(item.getItemId()){
                     case R.id.action_home:
                         Intent intent = new Intent(FitnessActivity.this, MainActivity.class);
-                        intent.putExtra("text", id);
                         startActivity(intent);
                         break;
                     case R.id.action_fitness:
                         break;
                     case R.id.action_info:
                         Intent intent2 = new Intent(FitnessActivity.this, InfoActivity.class);
-                        intent2.putExtra("text", id);
                         startActivity(intent2);
                         break;
                 }
@@ -65,7 +58,7 @@ public class FitnessActivity extends AppCompatActivity {
         helper = new DatabaseOpenHelper(FitnessActivity.this, DatabaseOpenHelper.tableName, null, version);
         database = helper.getWritableDatabase();
 
-        sql = "SELECT * FROM "+ helper.tableName + " WHERE id = '" + id + "'";
+        sql = "SELECT * FROM "+ helper.tableName + " WHERE login = '1'";
         cursor = database.rawQuery(sql, null);
 
         cursor.moveToNext();   // 첫번째에서 다음 레코드가 없을때까지 읽음
@@ -98,7 +91,6 @@ public class FitnessActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(FitnessActivity.this, DietActivity.class);
-                intent.putExtra("text", id);
                 startActivity(intent);
                 //finish();
             }
@@ -109,7 +101,6 @@ public class FitnessActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(FitnessActivity.this, LeanmassActivity.class);
-                intent.putExtra("text", id);
                 startActivity(intent);
                 //finish();
             }
@@ -120,7 +111,6 @@ public class FitnessActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(FitnessActivity.this, BulkActivity.class);
-                intent.putExtra("text", id);
                 startActivity(intent);
                 //finish();
             }

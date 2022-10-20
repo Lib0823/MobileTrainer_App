@@ -11,7 +11,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="MobileTrainer 개발즁...ㅠㅠ"
+        android:label="MobileTrainer"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Project2">
@@ -36,22 +36,11 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-
-            <action android:name="android.intent.action.VIEW" />
-
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-
-            <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
-            <data
-                android:host="oauth"
-                android:scheme="kakao3cd9b52483510ed256f98d3015fd7598" />
-        </intent-filter>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".JoinActivity"
@@ -62,6 +51,10 @@
         <activity
             android:name=".CalendarActivity"
             android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-8893270006086885~9171596324" />
     </application>
 
 </manifest>

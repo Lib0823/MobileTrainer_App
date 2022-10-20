@@ -9,6 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-8893270006086885/3919269645"/>
+        // TestID : ca-app-pub-3940256099942544/6300978111
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -82,7 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Copyright 2022.\n이인범 All rights reserved."
+            android:text="Copyright 2022.\nLee Inbeom All rights reserved."
             android:textSize="7pt"
             android:textStyle="italic" />
 

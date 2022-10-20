@@ -77,6 +77,11 @@ public class LoginActivity extends AppCompatActivity {
                     //Run값 초기화
                     database.execSQL("UPDATE Users SET " +
                             "run=0 WHERE id ='" + id + "'");
+                    //login값 초기화 / 세팅
+                    database.execSQL("UPDATE Users SET " +
+                            "login='0' WHERE NOT id ='" + id + "'");
+                    database.execSQL("UPDATE Users SET " +
+                            "login='1' WHERE id ='" + id + "'");
                     //인텐트 생성 및 호출
                     String inputId = idEditText.getText().toString();
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);

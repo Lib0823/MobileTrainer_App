@@ -3,6 +3,8 @@ package com.example.project2;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,9 +27,23 @@ public class CalendarActivity extends AppCompatActivity
     public TextView diaryTextView, textView2, textView3;
     public EditText contextEditText;
 
+    int version = 1;
+    DatabaseOpenHelper helper;
+    SQLiteDatabase database;
+
+    String sql;
+    Cursor cursor;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    public void onBackPressed() { // back키 이벤트
+        //super.onBackPressed();
+        Intent intent = new Intent(CalendarActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         calendarView = findViewById(R.id.calendarView);
@@ -38,30 +54,18 @@ public class CalendarActivity extends AppCompatActivity
         textView2 = findViewById(R.id.textView2);
         textView3 = findViewById(R.id.textView3);
         contextEditText = findViewById(R.id.contextEditText);
-        back_Btn = findViewById(R.id.back_Btn);
 
-        Intent getId = getIntent(); //전달할 데이터를 받을 Intent
-        //text 키값으로 데이터를 받는다. String을 받아야 하므로 getStringExtra()를 사용함
-        String id = getId.getStringExtra("text");
+        //DataBase연결부분
+        helper = new DatabaseOpenHelper(CalendarActivity.this, DatabaseOpenHelper.tableName, null, version);
+        database = helper.getWritableDatabase();
+        sql = "SELECT id FROM "+ helper.tableName + " WHERE login = '1'";
+        cursor = database.rawQuery(sql, null);
+        cursor.moveToNext();   // 첫번째에서 다음 레코드가 없을때까지 읽음
+        String id = cursor.getString(0);
 
-        TextView welcome = findViewById(R.id.idMessage);
-        welcome.setText("'"+id+ "'" + " 님의 운동일지");
-
-        back_Btn.setOnClickListener(new View.OnClickListener() {
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CalendarActivity.this, MainActivity.class);
-                intent.putExtra("text", id);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener()
-        {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth)
-            {
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 diaryTextView.setVisibility(View.VISIBLE);
                 save_Btn.setVisibility(View.VISIBLE);
                 contextEditText.setVisibility(View.VISIBLE);
@@ -70,14 +74,12 @@ public class CalendarActivity extends AppCompatActivity
                 del_Btn.setVisibility(View.INVISIBLE);
                 diaryTextView.setText(String.format("%d / %d / %d", year, month + 1, dayOfMonth));
                 contextEditText.setText("");
-                checkDay(year, month, dayOfMonth);
+                checkDay(id, year, month, dayOfMonth);
             }
         });
-        save_Btn.setOnClickListener(new View.OnClickListener()
-        {
+        save_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 saveDiary(readDay);
                 str = contextEditText.getText().toString();
                 textView2.setText(str);
@@ -91,9 +93,9 @@ public class CalendarActivity extends AppCompatActivity
         });
     }
 
-    public void checkDay(int cYear, int cMonth, int cDay)
+    public void checkDay(String id, int cYear, int cMonth, int cDay)
     {
-        readDay = "" + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt";
+        readDay = "" + id + "" + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt";
         FileInputStream fis;
 
         try

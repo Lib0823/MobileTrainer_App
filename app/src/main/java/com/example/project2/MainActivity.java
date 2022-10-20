@@ -18,6 +18,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     String sql;
     Cursor cursor;
 
+    private AdView mAdView;
+
     private BottomNavigationView bottomNavi;
 
     @Override
@@ -38,9 +45,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent getId = getIntent(); //전달할 데이터를 받을 Intent
-        //text 키값으로 데이터를 받는다. String을 받아야 하므로 getStringExtra()를 사용함
-        String id = getId.getStringExtra("text");
+        // 구글 광고API
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        //DataBase연결부분
+        helper = new DatabaseOpenHelper(MainActivity.this, DatabaseOpenHelper.tableName, null, version);
+        database = helper.getWritableDatabase();
+
+
+
+        sql = "SELECT * FROM "+ helper.tableName + " WHERE login = '1'";
+        cursor = database.rawQuery(sql, null);
+        cursor.moveToNext();   // 첫번째에서 다음 레코드가 없을때까지 읽음
+        String name = cursor.getString(2);
+
+        TextView welcome = findViewById(R.id.welcomeMessage);
+        welcome.setText(name + "님 환영합니다!");
 
         bottomNavi = findViewById(R.id.bottonNavi);
         bottomNavi.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -51,12 +78,10 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.action_fitness:
                         Intent intent = new Intent(MainActivity.this, FitnessActivity.class);
-                        intent.putExtra("text", id);
                         startActivity(intent);
                         break;
                     case R.id.action_info:
                         Intent intent2 = new Intent(MainActivity.this, InfoActivity.class);
-                        intent2.putExtra("text", id);
                         startActivity(intent2);
                         break;
                 }
@@ -65,25 +90,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //DataBase연결부분
-        helper = new DatabaseOpenHelper(MainActivity.this, DatabaseOpenHelper.tableName, null, version);
-        database = helper.getWritableDatabase();
-
-        sql = "SELECT * FROM "+ helper.tableName + " WHERE id = '" + id + "'";
-        cursor = database.rawQuery(sql, null);
-        cursor.moveToNext();   // 첫번째에서 다음 레코드가 없을때까지 읽음
-        String name = cursor.getString(2);
-
-        TextView welcome = findViewById(R.id.welcomeMessage);
-        welcome.setText(name + "님 환영합니다!");
-
         // 러닝
         run = findViewById(R.id.runBtn);
         run.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, RunActivity.class);
-                intent.putExtra("text", id);
                 startActivity(intent);
             }
         });
@@ -103,14 +115,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //String inputId = idEditText.getText().toString();
                 Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
-                intent.putExtra("text", id);
                 startActivity(intent);
                 //finish();
             }
         });
 
         // 러닝 프로그래스바
-        sql = "SELECT * FROM "+ helper.tableName + " WHERE id = '" + id + "'";
+        sql = "SELECT * FROM "+ helper.tableName + " WHERE login = '1'";
         cursor = database.rawQuery(sql, null);
         cursor.moveToNext();
         int run = Integer.parseInt(cursor.getString(6));

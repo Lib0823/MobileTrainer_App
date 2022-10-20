@@ -81,9 +81,6 @@ public class RunActivity extends AppCompatActivity implements TMapGpsManager.onL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run);
 
-        Intent getId = getIntent(); //전달할 데이터를 받을 Intent
-        //text 키값으로 데이터를 받는다. String을 받아야 하므로 getStringExtra()를 사용함
-        String id = getId.getStringExtra("text");
         //DataBase연결부분
         helper = new DatabaseOpenHelper(RunActivity.this, DatabaseOpenHelper.tableName, null, version);
         database = helper.getWritableDatabase();
@@ -181,14 +178,14 @@ public class RunActivity extends AppCompatActivity implements TMapGpsManager.onL
 //                Log.d(cr2, cr3);
 //                int time = Integer.parseInt(cr3);
 
-                sql = "SELECT * FROM "+ helper.tableName + " WHERE id = '" + id + "'";
+                sql = "SELECT * FROM "+ helper.tableName + " WHERE login = '1'";
                 cursor = database.rawQuery(sql, null);
                 cursor.moveToNext();   // 첫번째에서 다음 레코드가 없을때까지 읽음
                 int run = Integer.parseInt(cursor.getString(6));
                 run += m;
                 database.execSQL("UPDATE Users SET " +
                         "run="+run+
-                        " WHERE id ='" + id + "'");
+                        " WHERE login ='1'");
 
                 chrono.setBase(SystemClock.elapsedRealtime());
                 pauseOffset = 0;

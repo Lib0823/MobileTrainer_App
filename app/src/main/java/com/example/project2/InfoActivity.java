@@ -37,18 +37,15 @@ public class InfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
 
-        Intent getId = getIntent(); //전달할 데이터를 받을 Intent
-        //text 키값으로 데이터를 받는다. String을 받아야 하므로 getStringExtra()를 사용함
-        String id = getId.getStringExtra("text");
-
         //DataBase연결부분
         helper = new DatabaseOpenHelper(InfoActivity.this, DatabaseOpenHelper.tableName, null, version);
         database = helper.getWritableDatabase();
 
-        sql = "SELECT * FROM "+ helper.tableName + " WHERE id = '" + id + "'";
+        sql = "SELECT * FROM "+ helper.tableName + " WHERE login = '1'";
         cursor = database.rawQuery(sql, null);
 
         cursor.moveToNext();   // 첫번째에서 다음 레코드가 없을때까지 읽음
+        String id = cursor.getString(0);
         String pw = cursor.getString(1);
         String name = cursor.getString(2);
         String age = cursor.getString(3);
@@ -76,12 +73,10 @@ public class InfoActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.action_home:
                         Intent intent2 = new Intent(InfoActivity.this, MainActivity.class);
-                        intent2.putExtra("text", id);
                         startActivity(intent2);
                         break;
                     case R.id.action_fitness:
                         Intent intent = new Intent(InfoActivity.this, FitnessActivity.class);
-                        intent.putExtra("text", id);
                         startActivity(intent);
                         break;
                     case R.id.action_info:
@@ -102,7 +97,7 @@ public class InfoActivity extends AppCompatActivity {
                 int weight = Integer.parseInt(weightEdit.getText().toString());
                 database.execSQL("UPDATE Users SET " +
                         "age="+age+", height="+height+", weight="+weight+
-                        " WHERE id ='" + id + "'");
+                        " WHERE login ='1'");
 
                 Toast toast = Toast.makeText(InfoActivity.this, "수정되었습니다", Toast.LENGTH_SHORT);
                 toast.show();
@@ -115,7 +110,7 @@ public class InfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 database.execSQL("DELETE FROM Users"+
-                        " WHERE id ='" + id + "'");
+                        " WHERE login ='1'");
                 Toast toast = Toast.makeText(InfoActivity.this, "회원정보가 삭제되었습니다", Toast.LENGTH_SHORT);
                 toast.show();
                 Intent intent = new Intent(InfoActivity.this, LoginActivity.class);

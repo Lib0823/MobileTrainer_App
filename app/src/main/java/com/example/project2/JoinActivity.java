@@ -69,7 +69,8 @@ public class JoinActivity extends AppCompatActivity {
                 int age = Integer.parseInt(ageEditText.getText().toString());
                 int height = Integer.parseInt(heightEditText.getText().toString());
                 int weight = Integer.parseInt(weightEditText.getText().toString());
-                int run = 10;
+                int run = 0;
+                String login = "0";
 
 
                 sql = "SELECT id FROM "+ helper.tableName + " WHERE id = '" + id + "'";
@@ -80,7 +81,7 @@ public class JoinActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(JoinActivity.this, "존재하는 아이디입니다.", Toast.LENGTH_SHORT);
                     toast.show();
                 }else{
-                    helper.insertUser(database,id, pw, name, age, height, weight, run);
+                    helper.insertUser(database,id, pw, name, age, height, weight, run, login);
                     Toast toast = Toast.makeText(JoinActivity.this, "가입이 완료되었습니다. 로그인을 해주세요.", Toast.LENGTH_SHORT);
                     toast.show();
                     Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
