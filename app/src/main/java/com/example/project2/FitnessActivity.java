@@ -44,9 +44,13 @@ public class FitnessActivity extends AppCompatActivity {
                         break;
                     case R.id.action_fitness:
                         break;
-                    case R.id.action_info:
-                        Intent intent2 = new Intent(FitnessActivity.this, InfoActivity.class);
+                    case R.id.action_board:
+                        Intent intent2 = new Intent(FitnessActivity.this, BoardActivity.class);
                         startActivity(intent2);
+                        break;
+                    case R.id.action_info:
+                        Intent intent3 = new Intent(FitnessActivity.this, InfoActivity.class);
+                        startActivity(intent3);
                         break;
                 }
                 return true;

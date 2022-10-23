@@ -14,12 +14,13 @@ import android.widget.Toast;
 
 public class JoinActivity extends AppCompatActivity {
 
+    EditText idEditText, pwEditText, nameEditText, ageEditText, heightEditText, weightEditText;
+    Button btnJoin, btnBack;
+
     int version = 1;
     DatabaseOpenHelper helper;
     SQLiteDatabase database;
 
-    EditText idEditText, pwEditText, nameEditText, ageEditText, heightEditText, weightEditText;
-    Button btnJoin, btnBack;
 
     String sql;
     Cursor cursor;

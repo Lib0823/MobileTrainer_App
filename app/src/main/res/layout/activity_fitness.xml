@@ -82,6 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:rotationX="20"
+            app:labelVisibilityMode="labeled"
             android:background="#B8C7F0"
             app:itemIconTint="#000000"
             app:itemTextColor="#000000"

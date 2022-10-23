@@ -79,6 +79,10 @@ public class InfoActivity extends AppCompatActivity {
                         Intent intent = new Intent(InfoActivity.this, FitnessActivity.class);
                         startActivity(intent);
                         break;
+                    case R.id.action_board:
+                        Intent intent3 = new Intent(InfoActivity.this, BoardActivity.class);
+                        startActivity(intent3);
+                        break;
                     case R.id.action_info:
 
                         break;

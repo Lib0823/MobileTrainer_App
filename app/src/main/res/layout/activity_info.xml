@@ -236,6 +236,7 @@
             android:layout_gravity="bottom"
             android:background="#B8C7F0"
             android:rotationX="20"
+            app:labelVisibilityMode="labeled"
             app:itemIconTint="#000000"
             app:itemTextColor="#000000"
             app:menu="@menu/botton_menu"

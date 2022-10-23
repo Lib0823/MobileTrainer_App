@@ -9,6 +9,7 @@ import android.util.Log;
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     public static final String tableName = "Users";
+    public static final String tableNameBoard = "Board";
 
     public DatabaseOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -26,9 +27,25 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     public void createTable(SQLiteDatabase db){
         String sql = "CREATE TABLE " + tableName + "(id text, pw text, name text, age integer, height integer, weight integer, run integer, login text)";
+        String sql2 = "CREATE TABLE " + tableNameBoard + "(id text, content text, field text)";
         try {
             db.execSQL(sql);
+            db.execSQL(sql2);
         }catch (SQLException e){
+        }
+    }
+
+    public void insertBoard(SQLiteDatabase db, String id, String content, String field){
+        Log.i("tag","게시판 등록했을때 실행함");
+        db.beginTransaction();
+        try {
+            String sql2 = "INSERT INTO " + tableNameBoard + "(id, content, field)" + "values('"+ id +"', '"+ content +"', '"+ field +"')";
+            db.execSQL(sql2);
+            db.setTransactionSuccessful();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            db.endTransaction();
         }
     }
 

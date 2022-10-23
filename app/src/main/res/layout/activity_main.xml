@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-8893270006086885/3919269645"/>
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
         // TestID : ca-app-pub-3940256099942544/6300978111
 
         <ImageView
@@ -107,6 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:rotationX="20"
+                app:labelVisibilityMode="labeled"
                 android:background="#B8C7F0"
                 app:itemIconTint="#000000"
             app:itemTextColor="#000000"

@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         String name = cursor.getString(2);
 
         TextView welcome = findViewById(R.id.welcomeMessage);
-        welcome.setText(name + "님 환영합니다!");
+        welcome.setText(name + "님");
 
         bottomNavi = findViewById(R.id.bottonNavi);
         bottomNavi.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -80,9 +80,13 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(MainActivity.this, FitnessActivity.class);
                         startActivity(intent);
                         break;
-                    case R.id.action_info:
-                        Intent intent2 = new Intent(MainActivity.this, InfoActivity.class);
+                    case R.id.action_board:
+                        Intent intent2 = new Intent(MainActivity.this, BoardActivity.class);
                         startActivity(intent2);
+                        break;
+                    case R.id.action_info:
+                        Intent intent3 = new Intent(MainActivity.this, InfoActivity.class);
+                        startActivity(intent3);
                         break;
                 }
                 return true;
