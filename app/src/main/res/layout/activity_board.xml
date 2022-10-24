@@ -34,10 +34,12 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="2dp"/>
         <EditText
+            android:id="@+id/searchText"
             android:layout_gravity="center"
             android:layout_width="300dp"
             android:layout_height="wrap_content"/>
         <Button
+            android:id="@+id/searchBtn"
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:text="검색"/>
@@ -46,7 +48,7 @@
         <ListView
             android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="420dp">
+            android:layout_height="405dp">
         </ListView>
 
     <LinearLayout
@@ -77,8 +79,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="#B8C7F0"
-            android:rotationX="20"
+            android:layout_margin="13dp"
+            android:background="@drawable/radius_bottom_navi"
             app:labelVisibilityMode="labeled"
             app:itemIconTint="#000000"
             app:itemTextColor="#000000"

@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -26,9 +27,9 @@ public class BoardActivity extends AppCompatActivity {
 
     private ListView list;
     private BottomNavigationView bottomNavi, boardNavi;
-    private Button contentBtn;
-    private TextView contentText;
-    private String id, contentId, content, field = "free";
+    private Button contentBtn, searchBtn;
+    private TextView contentText, searchText;
+    private String id, contentId, content, field = "free", search;
 
     int version = 1;
     DatabaseOpenHelper helperBoard, helperUser;
@@ -141,12 +142,19 @@ public class BoardActivity extends AppCompatActivity {
 
         contentText = findViewById(R.id.contentText);
         contentText.requestFocus();
+
         //등록버튼 클릭 시
         contentBtn = findViewById(R.id.contentBtn);
         contentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 content = contentText.getText().toString();
+                if(content.contains("ㅅㅂ") || content.contains("ㅂㅅ") || content.contains("ㅗ") || content.contains("fuck")){
+                    // 비속어 필터링
+                    Toast toast = Toast.makeText(BoardActivity.this, "비속어는 등록 할 수 없습니다.", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
                 contentText.setText("");
                 helperBoard.insertBoard(databaseBoard, id, content, field);
                 data.clear();
@@ -164,6 +172,28 @@ public class BoardActivity extends AppCompatActivity {
             }
         });
 
+        searchBtn = findViewById(R.id.searchBtn);
+        searchText = findViewById(R.id.searchText);
+
+        //검색버튼 클릭 시
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                search = searchText.getText().toString();
+                data.clear();
+
+                sql = "SELECT id, content FROM "+ helperBoard.tableNameBoard + " WHERE field = '"+ field +"'" +
+                        " AND content LIKE '%"+search+"%'";
+                cursor = databaseBoard.rawQuery(sql, null);
+                while(cursor.moveToNext()){
+                    contentId = cursor.getString(0);
+                    content = cursor.getString(1);
+                    data.add(contentId+ " : " +content);
+                }
+                adapter.notifyDataSetChanged();
+                list.setSelection(adapter.getCount() - 1);
+            }
+        });
 
         // 바텀 네비게이션
         bottomNavi = findViewById(R.id.bottonNavi);

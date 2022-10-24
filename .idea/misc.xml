@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/drawable/radius.xml" value="0.134" />
+        <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/drawable/radius_background.xml" value="0.138" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/layout/activity_addr.xml" value="0.1037037037037037" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/layout/activity_address.xml" value="0.13145896656534956" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/layout/activity_board.xml" value="0.1" />

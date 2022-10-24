@@ -7,38 +7,41 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/bg_blue">
 
-        <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
+<!--        <com.google.android.gms.ads.AdView-->
+<!--            xmlns:ads="http://schemas.android.com/apk/res-auto"-->
+<!--            android:id="@+id/adView"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            ads:adSize="BANNER"-->
+<!--            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>-->
         // TestID : ca-app-pub-3940256099942544/6300978111
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/home"
-            android:layout_margin="2pt"
-            />
 
         <TextView
             android:id="@+id/welcomeMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="환영합니다."
-            android:gravity="center"
+            android:text="today's workout"
+            android:gravity="left"
+            android:textSize="13pt"
+            android:textStyle="bold"
+            android:textColor="@color/bg_white"
+            android:layout_margin="20dp"
             />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/radius_background"
+            android:padding="20dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#9999FF"
             android:text="운동 일지"
             android:textColor="#000000"
             android:textSize="9pt"
@@ -46,10 +49,9 @@
 
         <ImageButton
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="150dp"
             android:id="@+id/moveCal"
             android:src="@drawable/calendar"
-            android:backgroundTint="#B8C7F0"
             android:onClick="start"
             />
 
@@ -106,9 +108,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:rotationX="20"
+                android:layout_margin="13dp"
+                android:background="@drawable/radius_bottom_navi"
                 app:labelVisibilityMode="labeled"
-                android:background="#B8C7F0"
                 app:itemIconTint="#000000"
             app:itemTextColor="#000000"
             app:menu="@menu/botton_menu"
@@ -116,5 +118,6 @@
             tools:layout_editor_absoluteY="383dp" />
         </LinearLayout>
 
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
