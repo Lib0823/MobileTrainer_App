@@ -9,18 +9,21 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class JoinActivity extends AppCompatActivity {
 
     EditText idEditText, pwEditText, nameEditText, ageEditText, heightEditText, weightEditText;
     Button btnJoin, btnBack;
+    RadioGroup radioGender;
+    String gender = "man";
 
     int version = 1;
     DatabaseOpenHelper helper;
     SQLiteDatabase database;
-
 
     String sql;
     Cursor cursor;
@@ -36,6 +39,20 @@ public class JoinActivity extends AppCompatActivity {
         ageEditText = (EditText) findViewById(R.id.ageEditText);
         heightEditText = (EditText) findViewById(R.id.heightEditText);
         weightEditText = (EditText) findViewById(R.id.weightEditText);
+        radioGender = (RadioGroup) findViewById(R.id.radioGender);
+        radioGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int check) {
+                switch (check){
+                    case R.id.man:
+                        gender = "man";
+                        break;
+                    case R.id.woman:
+                        gender = "woman";
+                        break;
+                }
+            }
+        });
 
         btnJoin = (Button) findViewById(R.id.btnJoin);
         btnBack = (Button) findViewById(R.id.btnBack);
@@ -57,9 +74,22 @@ public class JoinActivity extends AppCompatActivity {
                     return;
                 }
 
-                if(idEditText.getText().length() < 5 || pwEditText.getText().length() < 5) {
-                    //아이디와 비밀번호는 5자 이상 입력해야 합니다.
-                    Toast toast = Toast.makeText(JoinActivity.this, "아이디와 비밀번호는 5자 이상 입력해야합니다.", Toast.LENGTH_SHORT);
+                if(idEditText.getText().length() < 5) {
+                    //아이디와 5자 이상 입력해야 합니다.
+                    Toast toast = Toast.makeText(JoinActivity.this, "아이디를 5자 이상 입력해주세요.", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+                if(pwEditText.getText().length() < 7) {
+                    //비밀번호는 7자 이상 입력해야 합니다.
+                    Toast toast = Toast.makeText(JoinActivity.this, "비밀번호를 7자 이상 입력해주세요.", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+                if(!pwEditText.getText().toString().contains("@") && !pwEditText.getText().toString().contains("#")
+                && !pwEditText.getText().toString().contains("%") && !pwEditText.getText().toString().contains("$")) {
+                    //비밀번호는 특수문자를 포함해야 합니다.
+                    Toast toast = Toast.makeText(JoinActivity.this, "비밀번호는 특수문자를 포함해야 합니다.", Toast.LENGTH_SHORT);
                     toast.show();
                     return;
                 }
@@ -74,6 +104,7 @@ public class JoinActivity extends AppCompatActivity {
                 String login = "0";
 
 
+
                 sql = "SELECT id FROM "+ helper.tableName + " WHERE id = '" + id + "'";
                 cursor = database.rawQuery(sql, null);
 
@@ -82,7 +113,7 @@ public class JoinActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(JoinActivity.this, "존재하는 아이디입니다.", Toast.LENGTH_SHORT);
                     toast.show();
                 }else{
-                    helper.insertUser(database,id, pw, name, age, height, weight, run, login);
+                    helper.insertUser(database,id, pw, name, age, height, weight, gender, run, login);
                     Toast toast = Toast.makeText(JoinActivity.this, "가입이 완료되었습니다. 로그인을 해주세요.", Toast.LENGTH_SHORT);
                     toast.show();
                     Intent intent = new Intent(getApplicationContext(),LoginActivity.class);

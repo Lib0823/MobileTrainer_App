@@ -129,7 +129,6 @@ public class RunActivity extends AppCompatActivity implements TMapGpsManager.onL
 
         startBtn = findViewById(R.id.startBtn);
         stopBtn = findViewById(R.id.stopBtn);
-        resetBtn = findViewById(R.id.resetBtn);
 
         //시작버튼
         startBtn.setOnClickListener(new View.OnClickListener() {
@@ -167,35 +166,26 @@ public class RunActivity extends AppCompatActivity implements TMapGpsManager.onL
             }
         });
 
-        //초기화버튼
-        resetBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    }
 
-                //초기화와 동시에 DB에 시간 값 저장
-//                String cr2 = String.valueOf(chrono);
-//                String cr3 = cr2.replace(":", "");
-//                Log.d(cr2, cr3);
-//                int time = Integer.parseInt(cr3);
+    @Override
+    public void onBackPressed() { // back키 이벤트
+        sql = "SELECT * FROM "+ helper.tableName + " WHERE login = '1'";
+        cursor = database.rawQuery(sql, null);
+        cursor.moveToNext();   // 첫번째에서 다음 레코드가 없을때까지 읽음
+        int run = Integer.parseInt(cursor.getString(7));
+        run += m;
+        database.execSQL("UPDATE Users SET " +
+                "run="+run+
+                " WHERE login ='1'");
 
-                sql = "SELECT * FROM "+ helper.tableName + " WHERE login = '1'";
-                cursor = database.rawQuery(sql, null);
-                cursor.moveToNext();   // 첫번째에서 다음 레코드가 없을때까지 읽음
-                int run = Integer.parseInt(cursor.getString(6));
-                run += m;
-                database.execSQL("UPDATE Users SET " +
-                        "run="+run+
-                        " WHERE login ='1'");
-
-                chrono.setBase(SystemClock.elapsedRealtime());
-                pauseOffset = 0;
-                chrono.stop();
-                running = false;
-                //count = 0;
-
-            }
-        });
-
+        chrono.setBase(SystemClock.elapsedRealtime());
+        pauseOffset = 0;
+        chrono.stop();
+        running = false;
+        Intent intent = new Intent(RunActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     // 지속적으로 위치를 받아와 설정해줌

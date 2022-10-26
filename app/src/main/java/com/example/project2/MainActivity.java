@@ -37,25 +37,12 @@ public class MainActivity extends AppCompatActivity {
     String sql;
     Cursor cursor;
 
-    private AdView mAdView;
-
     private BottomNavigationView bottomNavi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        // 구글 광고API
-//        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-//            @Override
-//            public void onInitializationComplete(InitializationStatus initializationStatus) {
-//            }
-//        });
-//        mAdView = findViewById(R.id.adView);
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        mAdView.loadAd(adRequest);
 
         //DataBase연결부분
         helper = new DatabaseOpenHelper(MainActivity.this, DatabaseOpenHelper.tableName, null, version);
@@ -130,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         sql = "SELECT * FROM "+ helper.tableName + " WHERE login = '1'";
         cursor = database.rawQuery(sql, null);
         cursor.moveToNext();
-        int run = Integer.parseInt(cursor.getString(6));
+        int run = Integer.parseInt(cursor.getString(7));
 
         ProgressBar progress = (ProgressBar) findViewById(R.id.progress) ;
         progress.setProgress(run) ;

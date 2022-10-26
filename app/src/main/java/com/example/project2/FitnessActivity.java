@@ -13,6 +13,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class FitnessActivity extends AppCompatActivity {
@@ -24,6 +29,8 @@ public class FitnessActivity extends AppCompatActivity {
     String sql;
     Cursor cursor;
 
+    private AdView mAdView;
+
     private BottomNavigationView bottomNavi;
 
     private ImageButton moveDiet, moveLeanmass, moveBulk;
@@ -32,6 +39,16 @@ public class FitnessActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fitness);
+
+        // 구글 광고API
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         bottomNavi = findViewById(R.id.bottonNavi);
         bottomNavi.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

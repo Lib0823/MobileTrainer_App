@@ -10,15 +10,6 @@
         android:layout_height="match_parent"
         android:background="@color/bg_blue">
 
-<!--        <com.google.android.gms.ads.AdView-->
-<!--            xmlns:ads="http://schemas.android.com/apk/res-auto"-->
-<!--            android:id="@+id/adView"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            ads:adSize="BANNER"-->
-<!--            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>-->
-        // TestID : ca-app-pub-3940256099942544/6300978111
 
         <TextView
             android:id="@+id/welcomeMessage"
@@ -29,7 +20,7 @@
             android:textSize="13pt"
             android:textStyle="bold"
             android:textColor="@color/bg_white"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             />
 
         <LinearLayout
@@ -37,7 +28,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="@drawable/radius_background"
-            android:padding="20dp">
+            android:paddingTop="20dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -67,7 +58,7 @@
         <ImageButton
             android:id="@+id/runBtn"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="100dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_baseline_directions_run_24"
             />
@@ -87,17 +78,12 @@
         // 하단 copyright
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="#CCE5FF"/>
-
-        <TextView
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="10dp"
             android:text="Copyright 2022.\nLee Inbeom All rights reserved."
             android:textSize="7pt"
             android:textStyle="italic" />
-
 
         <LinearLayout
         android:orientation="horizontal"

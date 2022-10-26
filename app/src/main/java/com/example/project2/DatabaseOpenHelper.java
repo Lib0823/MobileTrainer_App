@@ -26,7 +26,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     }
 
     public void createTable(SQLiteDatabase db){
-        String sql = "CREATE TABLE " + tableName + "(id text, pw text, name text, age integer, height integer, weight integer, run integer, login text)";
+        String sql = "CREATE TABLE " + tableName + "(id text, pw text, name text, age integer, height integer, weight integer, gender text, run integer, login text)";
         String sql2 = "CREATE TABLE " + tableNameBoard + "(id text, content text, field text)";
         try {
             db.execSQL(sql);
@@ -49,12 +49,12 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void insertUser(SQLiteDatabase db, String id, String pw, String name, int age, int height, int weight, int run, String login){
+    public void insertUser(SQLiteDatabase db, String id, String pw, String name, int age, int height, int weight, String gender, int run, String login){
         Log.i("tag","회원가입을 했을때 실행함");
         db.beginTransaction();
         try {
-            String sql = "INSERT INTO " + tableName + "(id, pw, name, age, height, weight, run, login)" + "values('"+ id +"', '"+pw+"', '"+name+"', "+age+
-                    ", "+height+", "+weight+", "+run+", '"+ login +"')";
+            String sql = "INSERT INTO " + tableName + "(id, pw, name, age, height, weight, gender, run, login)" + "values('"+ id +"', '"+pw+"', '"+name+"', "+age+
+                    ", "+height+", "+weight+", '"+gender+"', "+run+", '"+ login +"')";
             db.execSQL(sql);
             db.setTransactionSuccessful();
         }catch (Exception e){

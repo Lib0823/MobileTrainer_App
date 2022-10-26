@@ -10,7 +10,61 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="다이어트 홈"/>
+        android:text="다이어트"
+        android:textSize="10pt"/>
+
+    <TextView
+        android:id="@+id/BMR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="기초대사량"
+        android:textSize="10pt"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="운동강의"
+        android:textSize="10pt"/>
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/dietBtn"
+            android:layout_width="150dp"
+            android:layout_height="90dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_sentiment_very_dissatisfied_24"/>
+        <ImageButton
+            android:id="@+id/leanBtn"
+            android:layout_width="150dp"
+            android:layout_height="90dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_sentiment_very_dissatisfied_24"/>
+        <ImageButton
+            android:id="@+id/bulkBtn"
+            android:layout_width="150dp"
+            android:layout_height="90dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_sentiment_very_dissatisfied_24"/>
+    </LinearLayout>
+    </HorizontalScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="닭가슴살"
+        android:textSize="10pt"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="보충제"
+        android:textSize="10pt"/>
+        
 
 
 </LinearLayout>
