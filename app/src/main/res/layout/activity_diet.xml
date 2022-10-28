@@ -39,7 +39,7 @@
             android:textSize="7pt"/>
         <ProgressBar
             android:id="@+id/basicBar"
-            android:max="3000"
+            android:max="3500"
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:progressTint="#80ef66"
             android:progressBackgroundTint="#E0E0E0"
@@ -55,7 +55,7 @@
             android:textSize="7pt"/>
         <ProgressBar
             android:id="@+id/recomBar"
-            android:max="3000"
+            android:max="3500"
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:progressTint="#619bfc"
             android:progressBackgroundTint="#E0E0E0"

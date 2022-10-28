@@ -28,7 +28,8 @@ public class InfoActivity extends AppCompatActivity {
     String sql;
     Cursor cursor;
 
-    Button infoUpdate, infoDelete, infoLogout;
+    Button infoUpdate;
+    TextView textLogout, textDelete;
 
     private BottomNavigationView bottomNavi;
 
@@ -112,8 +113,8 @@ public class InfoActivity extends AppCompatActivity {
         });
 
         //회원탈퇴
-        infoDelete = (Button) findViewById(R.id.btnDelete);
-        infoDelete.setOnClickListener(new View.OnClickListener() {
+        textDelete = findViewById(R.id.textDelete);
+        textDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 database.execSQL("DELETE FROM Users"+
@@ -127,8 +128,8 @@ public class InfoActivity extends AppCompatActivity {
         });
 
         //로그아웃
-        infoLogout = (Button) findViewById(R.id.btnLogout);
-        infoLogout.setOnClickListener(new View.OnClickListener() {
+        textLogout = findViewById(R.id.textLogout);
+        textLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast toast = Toast.makeText(InfoActivity.this, "로그아웃 되었습니다", Toast.LENGTH_SHORT);

@@ -13,15 +13,15 @@
             android:layout_height="wrap_content"
             android:text="회원 정보 수정"
             android:textSize="10pt"
+            android:layout_margin="10dp"
             android:gravity="center"/>
 
     // 중간 정보 수정
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:padding="10dp"
+        android:padding="20dp"
         android:background="@drawable/radius_back4_gray"
         android:orientation="vertical">
     <RelativeLayout
@@ -31,7 +31,7 @@
     <TextView
         android:id="@+id/idText"
         android:text="@string/idText"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -42,7 +42,7 @@
     <TextView
         android:id="@+id/pwText"
         android:text="@string/pwText"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/idText"
@@ -51,7 +51,7 @@
     <TextView
         android:id="@+id/nameText"
         android:text="이름"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/pwText"
@@ -60,7 +60,7 @@
     <TextView
         android:id="@+id/ageText"
         android:text="나이"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/nameText"
@@ -69,7 +69,7 @@
     <TextView
         android:id="@+id/heightText"
         android:text="키"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ageText"
@@ -78,7 +78,7 @@
     <TextView
         android:id="@+id/weightText"
         android:text="몸무게"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/heightText"
@@ -87,7 +87,7 @@
         <TextView
             android:id="@+id/genderText"
             android:text="성별"
-            android:textSize="25sp"
+            android:textSize="30sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/weightText"
@@ -232,32 +232,42 @@
     <Button
         android:id="@+id/btnUpdate"
         android:text="정보수정"
+        android:textSize="9pt"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:backgroundTint="@color/bg_blue"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_below="@+id/weightText"
-        tools:ignore="ButtonStyle" />
+        android:layout_height="50dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:gravity="right"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
         android:orientation="horizontal">
-    <Button
-        android:id="@+id/btnLogout"
-        android:text="로그아웃"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:nextFocusForward="@+id/btnDelete"
-        tools:ignore="ButtonStyle" />
+        <TextView
+            android:id="@+id/textLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:textSize="8pt"
+            android:text="로그아웃"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="8pt"
+            android:text=" / "/>
+        <TextView
+            android:id="@+id/textDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:textSize="8pt"
+            android:text="회원탈퇴"/>
 
-    <Button
-        android:id="@+id/btnDelete"
-        android:text="회원탈퇴"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        tools:ignore="ButtonStyle" />
     </LinearLayout>
 
     // 하단 메뉴바

@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class BulkActivity extends AppCompatActivity {
@@ -18,7 +19,8 @@ public class BulkActivity extends AppCompatActivity {
     Cursor cursor;
 
     Double BMR, bulkup;
-    TextView bmrText;
+    TextView basicText, recomText;
+    ProgressBar basicBar, recomBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,16 @@ public class BulkActivity extends AppCompatActivity {
         String bulkup2 = String.format("%.0f", bulkup);
         String BMR2 = String.format("%.0f", BMR);
 
-        bmrText = findViewById(R.id.BMR);
-        bmrText.setText("기초대사량 : "+BMR2+"\n권장 섭취칼로리 : "+bulkup2); //기초대사량으로 일일섭취 칼로리 추천
+        basicText = findViewById(R.id.basic);
+        basicText.setText("기초                                 "+
+                "                                         "+BMR2); //기초대사량
+        recomText = findViewById(R.id.recommend);
+        recomText.setText("권장                                 "+
+                "                                         "+bulkup2); //권장섭취량
+
+        basicBar = findViewById(R.id.basicBar);
+        basicBar.setProgress(Integer.parseInt(BMR2));
+        recomBar = findViewById(R.id.recomBar);
+        recomBar.setProgress(Integer.parseInt(bulkup2));
     }
 }

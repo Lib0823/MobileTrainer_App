@@ -67,9 +67,11 @@ public class DietActivity extends AppCompatActivity {
         String BMR2 = String.format("%.0f", BMR);
 
         basicText = findViewById(R.id.basic);
-        basicText.setText("기초      "+BMR2); //기초대사량
+        basicText.setText("기초                                 "+
+                "                                         "+BMR2); //기초대사량
         recomText = findViewById(R.id.recommend);
-        recomText.setText("권장      "+diet2); //권장섭취량
+        recomText.setText("권장                                 "+
+                "                                         "+diet2); //권장섭취량
 
         basicBar = findViewById(R.id.basicBar);
         basicBar.setProgress(Integer.parseInt(BMR2));

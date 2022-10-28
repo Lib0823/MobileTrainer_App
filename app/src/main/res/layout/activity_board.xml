@@ -14,7 +14,7 @@
         android:text="게시판"
         android:gravity="center"
         android:textSize="10pt"
-        android:layout_margin="5dp"/>
+        android:layout_margin="10dp"/>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -51,7 +51,7 @@
         <ListView
             android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="405dp">
+            android:layout_height="390dp">
         </ListView>
 
     <LinearLayout

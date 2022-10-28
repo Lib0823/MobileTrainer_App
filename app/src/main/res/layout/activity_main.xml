@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:text="운동 일지"
             android:layout_marginLeft="40dp"
-            android:textSize="9pt"
+            android:textSize="8pt"
             android:textStyle="bold"
             android:layout_marginBottom="7dp"
             android:gravity="left"/>
@@ -62,7 +62,7 @@
             android:text="러닝"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="10dp"
-            android:textSize="10pt"
+            android:textSize="8pt"
             android:textStyle="bold"
             android:layout_marginBottom="7dp"
             android:gravity="left"/>

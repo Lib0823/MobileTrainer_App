@@ -10,13 +10,15 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Join"
+        android:text="SignUp"
         android:textSize="15pt"
+        android:layout_margin="20dp"
         android:gravity="center"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="300dp"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/idText"
@@ -215,30 +217,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RadioGroup>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/genderText">
-
-            <Button
-                android:id="@+id/btnJoin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/btnJoin"
-                tools:ignore="ButtonStyle" />
-
-            <Button
-                android:id="@+id/btnBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="취소"
-                tools:ignore="ButtonStyle" />
-
-        </LinearLayout>
-
-
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnJoin"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/bg_blue"
+        android:text="회원가입"
+        android:layout_gravity="center"
+        tools:ignore="ButtonStyle" />
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/bg_blue"
+        android:text="취소"
+        android:layout_gravity="center"
+        tools:ignore="ButtonStyle" />
+
 </LinearLayout>
