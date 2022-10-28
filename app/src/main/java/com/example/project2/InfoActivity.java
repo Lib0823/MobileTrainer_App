@@ -51,6 +51,7 @@ public class InfoActivity extends AppCompatActivity {
         String age = cursor.getString(3);
         String height = cursor.getString(4);
         String weight = cursor.getString(5);
+        String gender = cursor.getString(6);
 
         EditText idEdit = findViewById(R.id.idEditText);
         idEdit.setText(id);
@@ -64,6 +65,8 @@ public class InfoActivity extends AppCompatActivity {
         heightEdit.setText(height);
         EditText weightEdit = findViewById(R.id.weightEditText);
         weightEdit.setText(weight);
+        EditText genderEditText = findViewById(R.id.genderEditText);
+        genderEditText.setText(gender);
 
 
         bottomNavi = findViewById(R.id.bottonNavi);

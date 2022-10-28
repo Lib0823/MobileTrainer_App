@@ -28,7 +28,7 @@ public class BoardActivity extends AppCompatActivity {
     private ListView list;
     private BottomNavigationView bottomNavi, boardNavi;
     private Button contentBtn, searchBtn;
-    private TextView contentText, searchText;
+    private TextView contentText, searchText, boardTitle;
     private String id, contentId, content, field = "free", search;
 
     int version = 1;
@@ -72,6 +72,7 @@ public class BoardActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         list.setSelection(adapter.getCount() - 1);
 
+        boardTitle = findViewById(R.id.boardTitle);
         // Field변경 시 저장
         boardNavi = findViewById(R.id.boardNavi);
         boardNavi.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -92,6 +93,7 @@ public class BoardActivity extends AppCompatActivity {
                         }
                         adapter.notifyDataSetChanged();
                         list.setSelection(adapter.getCount() - 1);
+                        boardTitle.setText("자유 게시판");
                         break;
                     case R.id.diet:
                         field = "diet";
@@ -106,6 +108,7 @@ public class BoardActivity extends AppCompatActivity {
                         }
                         adapter.notifyDataSetChanged();
                         list.setSelection(adapter.getCount() - 1);
+                        boardTitle.setText("다이어트 게시판");
                         break;
                     case R.id.lean:
                         field = "lean";
@@ -120,6 +123,7 @@ public class BoardActivity extends AppCompatActivity {
                         }
                         adapter.notifyDataSetChanged();
                         list.setSelection(adapter.getCount() - 1);
+                        boardTitle.setText("린매스업 게시판");
                         break;
                     case R.id.bulk:
                         field = "bulk";
@@ -134,6 +138,7 @@ public class BoardActivity extends AppCompatActivity {
                         }
                         adapter.notifyDataSetChanged();
                         list.setSelection(adapter.getCount() - 1);
+                        boardTitle.setText("벌크업 게시판");
                         break;
                 }
                 return false;

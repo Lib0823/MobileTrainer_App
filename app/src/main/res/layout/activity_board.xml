@@ -8,9 +8,11 @@
     tools:context=".BoardActivity">
 
     <TextView
+        android:id="@+id/boardTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="게시판"
+        android:gravity="center"
         android:textSize="10pt"
         android:layout_margin="5dp"/>
 
@@ -42,6 +44,7 @@
             android:id="@+id/searchBtn"
             android:layout_width="60dp"
             android:layout_height="40dp"
+            android:backgroundTint="@color/bg_blue"
             android:text="검색"/>
     </LinearLayout>
 
@@ -64,6 +67,7 @@
             android:id="@+id/contentBtn"
             android:layout_width="60dp"
             android:layout_height="50dp"
+            android:backgroundTint="@color/bg_blue"
             android:text="등록"/>
     </LinearLayout>
 

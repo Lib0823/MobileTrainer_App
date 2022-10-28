@@ -50,6 +50,9 @@ public class FitnessActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
+
+
+        // 바텀네비게이션
         bottomNavi = findViewById(R.id.bottonNavi);
         bottomNavi.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -73,7 +76,6 @@ public class FitnessActivity extends AppCompatActivity {
                 return true;
             }
         });
-
 
         //DataBase연결부분
         helper = new DatabaseOpenHelper(FitnessActivity.this, DatabaseOpenHelper.tableName, null, version);
@@ -105,7 +107,9 @@ public class FitnessActivity extends AppCompatActivity {
         }
         String bmi2 = String.format("%.1f", bmi);
         TextView bmiResult = findViewById(R.id.BMI);
-        bmiResult.setText("BMI : '"+bmi2+"' 이므로 "+result+"입니다.\n("+recommend+" 추천합니다)");
+        TextView bmiRecomm = findViewById(R.id.BMI2);
+        bmiResult.setText("BMI : '"+bmi2+"'");
+        bmiRecomm.setText(result+"이며, "+recommend+" 추천합니다");
 
         moveDiet = (ImageButton) findViewById(R.id.dietBtn);
         moveDiet.setOnClickListener(new View.OnClickListener() {

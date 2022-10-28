@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/drawable/ic_baseline_message_24.xml" value="0.1405" />
+        <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.14" />
+        <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/drawable/menu_selector_color.xml" value="0.1405" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/drawable/radius.xml" value="0.134" />
+        <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/drawable/radius_back4_gray.xml" value="0.14" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/drawable/radius_background.xml" value="0.138" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/drawable/radius_background_double.xml" value="0.148" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/drawable/radius_bottom_navi.xml" value="0.1805" />

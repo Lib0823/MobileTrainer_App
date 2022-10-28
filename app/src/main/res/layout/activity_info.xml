@@ -11,11 +11,19 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="회원 정보"
+            android:text="회원 정보 수정"
             android:textSize="10pt"
             android:gravity="center"/>
 
     // 중간 정보 수정
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:background="@drawable/radius_back4_gray"
+        android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -23,7 +31,7 @@
     <TextView
         android:id="@+id/idText"
         android:text="@string/idText"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -34,7 +42,7 @@
     <TextView
         android:id="@+id/pwText"
         android:text="@string/pwText"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/idText"
@@ -43,7 +51,7 @@
     <TextView
         android:id="@+id/nameText"
         android:text="이름"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/pwText"
@@ -52,7 +60,7 @@
     <TextView
         android:id="@+id/ageText"
         android:text="나이"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/nameText"
@@ -61,7 +69,7 @@
     <TextView
         android:id="@+id/heightText"
         android:text="키"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ageText"
@@ -70,11 +78,20 @@
     <TextView
         android:id="@+id/weightText"
         android:text="몸무게"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/heightText"
         />
+
+        <TextView
+            android:id="@+id/genderText"
+            android:text="성별"
+            android:textSize="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/weightText"
+            />
 
     <EditText
         android:id="@+id/pwEditText"
@@ -186,19 +203,40 @@
         android:inputType="number"
         android:text=""
         android:textSize="15sp"
-        android:nextFocusForward="@+id/btnLogout"
         android:hint="78"/>
 
-        <Button
-            android:id="@+id/btnUpdate"
-            android:text="정보수정"
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/genderEditText"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_below="@+id/weightText"
-            tools:ignore="ButtonStyle" />
-    </RelativeLayout>
+            android:layout_alignTop="@+id/weightText"
+            android:layout_alignBottom="@+id/weightText"
+            android:layout_alignParentEnd="true"
 
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="41dp"
+            android:layout_marginEnd="-2dp"
+            android:layout_marginBottom="-41dp"
+            android:layout_toEndOf="@+id/weightText"
+            android:contentDescription="성별"
+            android:inputType="text"
+            android:text=""
+            android:textSize="15sp"
+            android:enabled="false"
+            android:hint="man"/>
+
+
+    </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:text="정보수정"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_below="@+id/weightText"
+        tools:ignore="ButtonStyle" />
 
     <LinearLayout
         android:layout_width="match_parent"
