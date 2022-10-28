@@ -1,5 +1,6 @@
 package com.example.project2;
 
+import androidx.annotation.IdRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -42,14 +43,12 @@ public class JoinActivity extends AppCompatActivity {
         radioGender = (RadioGroup) findViewById(R.id.radioGender);
         radioGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int check) {
-                switch (check){
-                    case R.id.man:
-                        gender = "man";
-                        break;
-                    case R.id.woman:
-                        gender = "woman";
-                        break;
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int check) {
+                if(check == R.id.man){
+                    gender = "man";
+                }
+                if(check == R.id.woman){
+                    gender = "woman";
                 }
             }
         });

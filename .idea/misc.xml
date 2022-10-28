@@ -5,7 +5,9 @@
       <map>
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/drawable/radius.xml" value="0.134" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/drawable/radius_background.xml" value="0.138" />
+        <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/drawable/radius_background_double.xml" value="0.148" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/drawable/radius_bottom_navi.xml" value="0.1805" />
+        <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/drawable/radius_progress.xml" value="0.148" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/layout/activity_addr.xml" value="0.1037037037037037" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/layout/activity_address.xml" value="0.13145896656534956" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/layout/activity_board.xml" value="0.1" />
@@ -25,6 +27,7 @@
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/layout/listview.xml" value="0.17603850050658562" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/menu/board_menu.xml" value="0.1" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/menu/botton_menu.xml" value="0.12314814814814815" />
+        <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.148" />
       </map>
     </option>
   </component>

@@ -19,8 +19,10 @@
             android:gravity="left"
             android:textSize="13pt"
             android:textStyle="bold"
-            android:textColor="@color/bg_white"
-            android:layout_margin="10dp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
             />
 
         <LinearLayout
@@ -28,15 +30,17 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="@drawable/radius_background"
-            android:paddingTop="20dp">
+            android:paddingTop="10dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="운동 일지"
-            android:textColor="#000000"
+            android:layout_marginLeft="40dp"
             android:textSize="9pt"
-            android:gravity="center"/>
+            android:textStyle="bold"
+            android:layout_marginBottom="7dp"
+            android:gravity="left"/>
 
         <ImageButton
             android:layout_width="match_parent"
@@ -44,6 +48,10 @@
             android:id="@+id/moveCal"
             android:src="@drawable/calendar"
             android:onClick="start"
+            android:elevation="5dp"
+            android:background="@drawable/radius_bottom_navi"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             />
 
 
@@ -51,15 +59,23 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Running"
+            android:text="러닝"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
             android:textSize="10pt"
-            android:gravity="center"/>
+            android:textStyle="bold"
+            android:layout_marginBottom="7dp"
+            android:gravity="left"/>
 
         <ImageButton
             android:id="@+id/runBtn"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="130dp"
             android:scaleType="fitCenter"
+            android:elevation="5dp"
+            android:background="@drawable/radius_bottom_navi"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
             android:src="@drawable/ic_baseline_directions_run_24"
             />
 
@@ -67,12 +83,11 @@
             android:layout_gravity="center"
             android:layout_width="370dp"
             android:layout_height="wrap_content"
-            android:paddingBottom="30dp"
+            android:paddingBottom="20dp"
             android:max="30"
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:progressTint="#66FFFF"
             android:progressBackgroundTint="#E0E0E0"
-            android:radius="100dp"
             android:id="@+id/progress" />
 
         // 하단 copyright
@@ -80,7 +95,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="10dp"
             android:text="Copyright 2022.\nLee Inbeom All rights reserved."
             android:textSize="7pt"
             android:textStyle="italic" />

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
@@ -30,7 +31,8 @@ public class DietActivity extends AppCompatActivity {
     Cursor cursor;
 
     Double BMR, diet;
-    TextView bmrText;
+    TextView basicText, recomText;
+    ProgressBar basicBar, recomBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +66,15 @@ public class DietActivity extends AppCompatActivity {
         String diet2 = String.format("%.0f", diet);
         String BMR2 = String.format("%.0f", BMR);
 
-        bmrText = findViewById(R.id.BMR);
-        bmrText.setText("기초대사량 : "+BMR2+"\n"+diet2+"칼로리 섭취 추천"); //기초대사량으로 일일섭취 칼로리 추천
+        basicText = findViewById(R.id.basic);
+        basicText.setText("기초      "+BMR2); //기초대사량
+        recomText = findViewById(R.id.recommend);
+        recomText.setText("권장      "+diet2); //권장섭취량
+
+        basicBar = findViewById(R.id.basicBar);
+        basicBar.setProgress(Integer.parseInt(BMR2));
+        recomBar = findViewById(R.id.recomBar);
+        recomBar.setProgress(Integer.parseInt(diet2));
 
     }
 

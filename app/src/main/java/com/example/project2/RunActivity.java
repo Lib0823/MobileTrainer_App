@@ -70,11 +70,29 @@ public class RunActivity extends AppCompatActivity implements TMapGpsManager.onL
     // 멀티터치 이벤트
     private double touch_interval_X = 0; // X 터치 간격
     private double touch_interval_Y = 0; // Y 터치 간격
-    //private int zoom_in_count = 0; // 줌 인 카운트
-    //private int zoom_out_count = 0; // 줌 아웃 카운트
-    //private int touch_zoom = 0; // 줌 크기
 
     ArrayList<TMapPoint> alTMapPoint = new ArrayList<TMapPoint>();
+
+    @Override
+    public void onBackPressed() { // back키 이벤트
+
+        sql = "SELECT * FROM "+ helper.tableName + " WHERE login = '1'";
+        cursor = database.rawQuery(sql, null);
+        cursor.moveToNext();   // 첫번째에서 다음 레코드가 없을때까지 읽음
+        int run = Integer.parseInt(cursor.getString(7));
+        run += m;
+        database.execSQL("UPDATE Users SET " +
+                "run="+run+
+                " WHERE login ='1'");
+
+        chrono.setBase(SystemClock.elapsedRealtime());
+        pauseOffset = 0;
+        chrono.stop();
+        running = false;
+        Intent intent = new Intent(RunActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,25 +186,7 @@ public class RunActivity extends AppCompatActivity implements TMapGpsManager.onL
 
     }
 
-    @Override
-    public void onBackPressed() { // back키 이벤트
-        sql = "SELECT * FROM "+ helper.tableName + " WHERE login = '1'";
-        cursor = database.rawQuery(sql, null);
-        cursor.moveToNext();   // 첫번째에서 다음 레코드가 없을때까지 읽음
-        int run = Integer.parseInt(cursor.getString(7));
-        run += m;
-        database.execSQL("UPDATE Users SET " +
-                "run="+run+
-                " WHERE login ='1'");
 
-        chrono.setBase(SystemClock.elapsedRealtime());
-        pauseOffset = 0;
-        chrono.stop();
-        running = false;
-        Intent intent = new Intent(RunActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
 
     // 지속적으로 위치를 받아와 설정해줌
     @Override

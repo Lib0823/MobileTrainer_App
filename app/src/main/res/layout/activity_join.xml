@@ -205,16 +205,15 @@
             <RadioButton
                 android:id="@+id/man"
                 android:text="남자"
+                android:checked="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true" />
+                android:layout_height="wrap_content" />
 
             <RadioButton
                 android:id="@+id/woman"
                 android:text="여자"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="false" />
+                android:layout_height="wrap_content" />
         </RadioGroup>
 
         <LinearLayout

@@ -53,6 +53,6 @@ public class BulkActivity extends AppCompatActivity {
         String BMR2 = String.format("%.0f", BMR);
 
         bmrText = findViewById(R.id.BMR);
-        bmrText.setText("기초대사량 : "+BMR2+"\n"+bulkup2+"칼로리 섭취 추천"); //기초대사량으로 일일섭취 칼로리 추천
+        bmrText.setText("기초대사량 : "+BMR2+"\n권장 섭취칼로리 : "+bulkup2); //기초대사량으로 일일섭취 칼로리 추천
     }
 }
