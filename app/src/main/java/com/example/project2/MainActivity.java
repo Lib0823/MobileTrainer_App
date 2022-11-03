@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     String sql;
     Cursor cursor;
 
+    private ImageButton developer;
     private BottomNavigationView bottomNavi;
 
     @Override
@@ -44,11 +46,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        developer = findViewById(R.id.developer);
+        developer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Copyright 2022.").setMessage("LeeSoo, LeeInbeom All rights reserved.");
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
+
         //DataBase연결부분
         helper = new DatabaseOpenHelper(MainActivity.this, DatabaseOpenHelper.tableName, null, version);
         database = helper.getWritableDatabase();
-
-
 
         sql = "SELECT * FROM "+ helper.tableName + " WHERE login = '1'";
         cursor = database.rawQuery(sql, null);
@@ -141,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... arg0) {
             try {
                 for (int i = 0; i < 5; i++) {
-                    asyncDialog.setProgress(i * 20);
+                    asyncDialog.setProgress(i * 50);
                     Thread.sleep(500);
                 }
             } catch (InterruptedException e) {

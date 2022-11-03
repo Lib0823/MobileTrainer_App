@@ -24,7 +24,7 @@
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/layout/activity_leanmass.xml" value="0.11296296296296296" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/layout/activity_run.xml" value="0.1" />
+        <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/layout/activity_run.xml" value="0.25" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/layout/activity_run2.xml" value="0.17603850050658562" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/layout/activity_run3.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/Leeinbeom/AndroidStudioProjects/project2/app/src/main/res/layout/activity_test.xml" value="0.1757852077001013" />
@@ -40,5 +40,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.22" />
+      </ProjectState>
+    </option>
   </component>
 </project>

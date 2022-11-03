@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +28,8 @@ public class BoardActivity extends AppCompatActivity {
 
     private ListView list;
     private BottomNavigationView bottomNavi, boardNavi;
-    private Button contentBtn, searchBtn;
+    private Button contentBtn;
+    private ImageButton searchBtn;
     private TextView contentText, searchText, boardTitle;
     private String id, contentId, content, field = "free", search;
 
@@ -141,7 +143,7 @@ public class BoardActivity extends AppCompatActivity {
                         boardTitle.setText("벌크업 게시판");
                         break;
                 }
-                return false;
+                return true;
             }
         });
 
