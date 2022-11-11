@@ -15,16 +15,19 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class JoinActivity extends AppCompatActivity {
 
     EditText idEditText, pwEditText, nameEditText, ageEditText, heightEditText, weightEditText;
     Button btnJoin, btnBack;
     RadioGroup radioGender;
-    String gender = "man";
+    String gender = "man", date;
 
     int version = 1;
-    DatabaseOpenHelper helper;
-    SQLiteDatabase database;
+    DatabaseOpenHelper helper, helperRecord;
+    SQLiteDatabase database, databaseRecord;
 
     String sql;
     Cursor cursor;
@@ -58,6 +61,9 @@ public class JoinActivity extends AppCompatActivity {
 
         helper = new DatabaseOpenHelper(JoinActivity.this, DatabaseOpenHelper.tableName, null, version);
         database = helper.getWritableDatabase();
+
+        helperRecord = new DatabaseOpenHelper(JoinActivity.this, DatabaseOpenHelper.tableNameRecord, null, version);
+        databaseRecord = helperRecord.getWritableDatabase();
 
         btnJoin.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -102,6 +108,11 @@ public class JoinActivity extends AppCompatActivity {
                 int run = 0;
                 String login = "0";
 
+                // 현재 날짜 가져오기
+                long now = System.currentTimeMillis();
+                Date date1 = new Date(now);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+                date = sdf.format(date1);
 
 
                 sql = "SELECT id FROM "+ helper.tableName + " WHERE id = '" + id + "'";
@@ -112,7 +123,19 @@ public class JoinActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(JoinActivity.this, "존재하는 아이디입니다.", Toast.LENGTH_SHORT);
                     toast.show();
                 }else{
-                    helper.insertUser(database,id, pw, name, age, height, weight, gender, run, login);
+                    int time = 0;
+                    double distance = 0.0;
+                    int step = 0;
+                    double kcal = 0.0;
+
+                    // Record값 삽입
+                    long now2 = System.currentTimeMillis();
+                    Date date2 = new Date(now2);
+                    SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd");
+                    String date3 = sdf2.format(date2);
+                    helperRecord.insertRecord(databaseRecord,id, date3, time, distance, step, kcal);
+
+                    helper.insertUser(database,id, pw, name, age, height, weight, gender, run, login, date);
                     Toast toast = Toast.makeText(JoinActivity.this, "가입이 완료되었습니다. 로그인을 해주세요.", Toast.LENGTH_SHORT);
                     toast.show();
                     Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
@@ -126,8 +149,6 @@ public class JoinActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //취소버튼 클릭
-                Toast toast = Toast.makeText(JoinActivity.this, "회원가입 취소", Toast.LENGTH_SHORT);
-                toast.show();
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
                 finish();

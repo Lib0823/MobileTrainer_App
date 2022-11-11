@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     String sql;
     Cursor cursor;
 
-    private ImageButton developer;
+    private ImageButton developer, recordBtn;
     private BottomNavigationView bottomNavi;
 
     @Override
@@ -51,9 +51,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Copyright 2022.").setMessage("LeeSoo, LeeInbeom All rights reserved.");
+                builder.setTitle("Copyright 2022.").setMessage("LeeInbeom All rights reserved.");
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
+            }
+        });
+
+        recordBtn = findViewById(R.id.recordBtn);
+        recordBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, RecordActivity.class);
+                startActivity(intent);
             }
         });
 

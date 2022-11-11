@@ -225,6 +225,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/bg_blue"
         android:text="회원가입"
+        android:textColor="@color/bg_white"
         android:layout_gravity="center"
         tools:ignore="ButtonStyle" />
 
@@ -234,6 +235,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/bg_blue"
         android:text="취소"
+        android:textColor="@color/bg_white"
         android:layout_gravity="center"
         tools:ignore="ButtonStyle" />
 

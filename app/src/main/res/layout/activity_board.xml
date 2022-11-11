@@ -22,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         app:labelVisibilityMode="labeled"
+        android:background="@color/bg_white"
         app:menu="@menu/board_menu"/>
 
     <LinearLayout
@@ -35,7 +36,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:hint="Search"
             android:padding="5dp"
             android:background="@drawable/border"
@@ -51,6 +52,8 @@
 
     <ListView
         android:id="@+id/list"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="400dp">
     </ListView>
@@ -69,8 +72,9 @@
         <Button
             android:id="@+id/contentBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/bg_blue"
+            android:layout_height="40dp"
+            android:background="@color/bg_blue"
+            android:textColor="@color/bg_white"
             android:layout_marginRight="5dp"
             android:text="등록"/>
     </LinearLayout>

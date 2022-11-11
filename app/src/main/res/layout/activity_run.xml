@@ -124,6 +124,8 @@
                 android:textStyle="bold"
                 android:textSize="15sp"
                 android:background="@drawable/radius_bottom_navi"
+                android:backgroundTint="@color/bg_blue"
+                android:textColor="@color/white"
                 android:elevation="20dp"
                 android:text="시작"/>
             <Button
@@ -138,6 +140,8 @@
                 android:textStyle="bold"
                 android:textSize="15sp"
                 android:background="@drawable/radius_bottom_navi"
+                android:backgroundTint="@color/bg_blue"
+                android:textColor="@color/white"
                 android:elevation="20dp"
                 android:text="정지"/>
         </LinearLayout>

@@ -41,7 +41,9 @@ import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapPolyLine;
 import com.skt.Tmap.TMapView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class RunActivity extends AppCompatActivity implements SensorEventListener, TMapGpsManager.onLocationChangedCallback {
 
@@ -59,13 +61,15 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     int currentSteps = 0;
 
     int m; // 크로노미터 분
+    int h; // " 시간
 
     int version = 1;
-    DatabaseOpenHelper helper;
-    SQLiteDatabase database;
+    DatabaseOpenHelper helperUser, helperRecord;
+    SQLiteDatabase databaseUser, databaseRecord;
 
     String sql;
     Cursor cursor;
+    private String id;
 
     double[] lon = new double[1000];
     double[] lat = new double[1000];
@@ -91,14 +95,46 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     @Override
     public void onBackPressed() { // back키 이벤트
 
-        sql = "SELECT * FROM "+ helper.tableName + " WHERE login = '1'";
-        cursor = database.rawQuery(sql, null);
+        sql = "SELECT * FROM "+ helperUser.tableName + " WHERE login = '1'";
+        cursor = databaseUser.rawQuery(sql, null);
         cursor.moveToNext();   // 첫번째에서 다음 레코드가 없을때까지 읽음
+        id = cursor.getString(0);
         int run = Integer.parseInt(cursor.getString(7));
-        run += m;
-        database.execSQL("UPDATE Users SET " +
+        run += currentSteps;
+        databaseUser.execSQL("UPDATE Users SET " +
                 "run="+run+
                 " WHERE login ='1'");
+
+    // Record에 데이터 저장
+        // 현재 날짜 가져오기
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
+        String dateNow = sdf.format(date);
+        Log.d("현재날짜",dateNow);
+        // 저장 데이터 불러오기
+        sql = "SELECT * FROM "+ helperRecord.tableNameRecord + " WHERE id = '"+id+"' AND date = '"+dateNow+"'";
+        cursor = databaseRecord.rawQuery(sql, null);
+        cursor.moveToNext();   // 첫번째에서 다음 레코드가 없을때까지 읽음
+        int time = cursor.getInt(2);
+        double distance = cursor.getDouble(3);
+        int step = cursor.getInt(4);
+        double kcal = cursor.getDouble(5);
+
+        // 불러온 데이터에 데이터 합치기
+        int minute = m;
+        for(int i=1;i<=h;i++){
+            minute += 60;
+        }
+        time += minute;
+        distance += total;
+        step += currentSteps;
+        kcal += countKcal;
+
+        // 해당 사용자의 현재 날짜에 값 업데이트
+        databaseRecord.execSQL("UPDATE Record SET " +
+                "time="+time+", distance="+distance+", step="+step+", kcal="+kcal+
+                " WHERE id = '"+id+"' AND date = '"+dateNow+"'");
 
         chrono.setBase(SystemClock.elapsedRealtime());
         pauseOffset = 0;
@@ -117,9 +153,13 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run);
 
-        //DataBase연결부분
-        helper = new DatabaseOpenHelper(RunActivity.this, DatabaseOpenHelper.tableName, null, version);
-        database = helper.getWritableDatabase();
+        //DataBase연결부분 (record)
+        helperRecord = new DatabaseOpenHelper(RunActivity.this, DatabaseOpenHelper.tableNameRecord, null, version);
+        databaseRecord = helperRecord.getWritableDatabase();
+
+        //DataBase연결부분 (user)
+        helperUser = new DatabaseOpenHelper(RunActivity.this, DatabaseOpenHelper.tableName, null, version);
+        databaseUser = helperUser.getWritableDatabase();
 
 
         //걸음수
@@ -219,7 +259,7 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
             @Override
             public void onChronometerTick(Chronometer cArg) {
                 long time = SystemClock.elapsedRealtime() - cArg.getBase();
-                int h   = (int)(time /3600000);
+                h   = (int)(time /3600000);
                 m = (int)(time - h*3600000)/60000;
                 int s= (int)(time - h*3600000- m*60000)/1000 ;
                 String hh = h < 10 ? "0"+h: h+"";

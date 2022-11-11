@@ -11,11 +11,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 public class LoginActivity extends AppCompatActivity {
 
     int version = 1;
-    DatabaseOpenHelper helper;
-    SQLiteDatabase database;
+    DatabaseOpenHelper helperUser, helperRecord;
+    SQLiteDatabase databaseUser, databaseRecord;
 
     EditText idEditText;
     EditText pwEditText;
@@ -36,8 +41,10 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnJoin = (Button) findViewById(R.id.btnJoin);
 
-        helper = new DatabaseOpenHelper(LoginActivity.this, DatabaseOpenHelper.tableName, null, version);
-        database = helper.getWritableDatabase();
+        helperUser = new DatabaseOpenHelper(LoginActivity.this, DatabaseOpenHelper.tableName, null, version);
+        databaseUser = helperUser.getWritableDatabase();
+        helperRecord = new DatabaseOpenHelper(LoginActivity.this, DatabaseOpenHelper.tableNameRecord, null, version);
+        databaseRecord = helperRecord.getWritableDatabase();
 
         btnLogin.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -52,35 +59,68 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                sql = "SELECT id FROM "+ helper.tableName + " WHERE id = '" + id + "'";
-                cursor = database.rawQuery(sql, null);
+                sql = "SELECT id FROM "+ helperUser.tableName + " WHERE id = '" + id + "'";
+                cursor = databaseUser.rawQuery(sql, null);
 
                 if(cursor.getCount() != 1){
                     //아이디가 틀렸습니다.
-                    Toast toast = Toast.makeText(LoginActivity.this, "존재하지 않는 아이디입니다.", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(LoginActivity.this, "아이디가 틀렸습니다.", Toast.LENGTH_SHORT);
                     toast.show();
                     return;
                 }
 
-                sql = "SELECT pw FROM "+ helper.tableName + " WHERE id = '" + id + "'";
-                cursor = database.rawQuery(sql, null);
+                sql = "SELECT pw FROM "+ helperUser.tableName + " WHERE id = '" + id + "'";
+                cursor = databaseUser.rawQuery(sql, null);
 
                 cursor.moveToNext();
                 if(!pw.equals(cursor.getString(0))){
                     //비밀번호가 틀렸습니다.
                     Toast toast = Toast.makeText(LoginActivity.this, "비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT);
                     toast.show();
-                }else{
-                    //로그인성공
-                    Toast toast = Toast.makeText(LoginActivity.this, "로그인성공", Toast.LENGTH_SHORT);
-                    toast.show();
-                    //Run값 초기화
-                    database.execSQL("UPDATE Users SET " +
-                            "run=0 WHERE id ='" + id + "'");
+                }else{ // 로그인 성공
+                    // 현재 날짜 가져오기
+                    long now = System.currentTimeMillis();
+                    Date date = new Date(now);
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+                    String dateNow = sdf.format(date);
+                    // 저장된 날짜 가져오기
+                    sql = "SELECT date FROM "+ helperUser.tableName + " WHERE id = '" + id + "'";
+                    cursor = databaseUser.rawQuery(sql, null);
+                    cursor.moveToNext();
+                    String dateSave = cursor.getString(0);
+
+                    // 저장된 날짜가 현재 날짜와 다르다면
+                    if(!dateSave.equals(dateNow)){
+
+                        // Run값 초기화
+                        databaseUser.execSQL("UPDATE Users SET " +
+                                "run=0 WHERE id ='" + id + "'");
+
+                        // 다시 현재 날짜 세팅
+                        databaseUser.execSQL("UPDATE Users SET " +
+                                "date='"+dateNow+"' WHERE id ='" + id + "'");
+
+                        int time = 0;
+                        double distance = 0.0;
+                        int step = 0;
+                        double kcal = 0.0;
+
+                        // Record에 삽입할 현재 날짜
+                        long now2 = System.currentTimeMillis();
+                        Date date2 = new Date(now2);
+                        SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd");
+                        String dateNow2 = sdf2.format(date2);
+
+                        // 새로운 Record값 insert
+                        helperRecord.insertRecord(databaseRecord,id, dateNow2, time, distance, step, kcal);
+
+                    }
+
+
                     //login값 초기화 / 세팅
-                    database.execSQL("UPDATE Users SET " +
+                    databaseUser.execSQL("UPDATE Users SET " +
                             "login='0' WHERE NOT id ='" + id + "'");
-                    database.execSQL("UPDATE Users SET " +
+                    databaseUser.execSQL("UPDATE Users SET " +
                             "login='1' WHERE id ='" + id + "'");
                     //인텐트 생성 및 호출
                     String inputId = idEditText.getText().toString();
