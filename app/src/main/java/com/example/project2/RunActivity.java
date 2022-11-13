@@ -203,19 +203,14 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
         LinearLayout linearLayoutTmap = (LinearLayout)findViewById(R.id.linearLayoutTmap);
         linearLayoutTmap.addView(tMapView);
 
-        // Request For GPS permission
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }
-
         // GPS using T Map
         tMapGPS = new TMapGpsManager(this);
 
         // Initial Setting
-        tMapGPS.setMinTime(100);    // 일정 시간마다 리셋
+        tMapGPS.setMinTime(1000);    // 일정 시간마다 리셋
         tMapGPS.setMinDistance(1);  // 일정 거리마다 리셋
-        //tMapGPS.setProvider(tMapGPS.NETWORK_PROVIDER); //네트워크
-        tMapGPS.setProvider(tMapGPS.GPS_PROVIDER);       //GPS
+        tMapGPS.setProvider(tMapGPS.NETWORK_PROVIDER); //네트워크
+        //tMapGPS.setProvider(tMapGPS.GPS_PROVIDER);       //GPS
 
         // 화면중심을 단말의 현재위치로 이동
         tMapView.setTrackingMode(true);

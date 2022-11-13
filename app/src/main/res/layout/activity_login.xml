@@ -4,37 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
+    android:background="@color/white"
     android:orientation="vertical">
 
-
-    <LinearLayout
+    <ImageView
+        android:id="@+id/introImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="50dp"
-        android:orientation="horizontal">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mobile"
-        android:layout_marginBottom="35dp"
-        android:textColor="#2659bb"
-        android:textSize="17pt"/>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
-        android:src="@drawable/logo"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Trainer"
-            android:layout_marginBottom="35dp"
-            android:textColor="#2659bb"
-            android:textSize="17pt"/>
-    </LinearLayout>
-
+        android:layout_gravity="center"/>
 
 <LinearLayout
     android:layout_width="match_parent"
